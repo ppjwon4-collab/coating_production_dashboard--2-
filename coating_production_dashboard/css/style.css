@@ -1,0 +1,280 @@
+/* 기본 테마 및 레이아웃 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f9;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 헤더 및 파일 업로드 버튼 스타일 고도화 */
+header {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #1e293b;
+}
+
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 실제 인풋 파일은 숨기고 세련된 라벨 스타일로 트리거 구현 */
+#csvFileInput {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.custom-file-upload:hover {
+    background: #1d4ed8;
+}
+
+#fileNameDisplay {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* 요약 대시보드 카드 그리드 디자인 */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-left: 5px solid #3b82f6;
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* 불량률 카드는 직관적으로 붉은색 계열 경고 처리 */
+.card-ng {
+    border-left-color: #ef4444;
+}
+.card-ng p {
+    color: #dc2626;
+}
+
+/* 불량(NG) 요약 섹션 전용 스타일 */
+.ng-summary-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border: 1px solid #fee2e2;
+}
+
+.ng-summary-section h2 {
+    font-size: 18px;
+    color: #991b1b;
+    margin-bottom: 15px;
+}
+
+/* 시각화 그래프 영역 2x2 배치 구조 */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 650px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.chart-container h2 {
+    font-size: 16px;
+    color: #1e293b;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-info {
+    font-size: 12px;
+    font-weight: normal;
+    color: #94a3b8;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* div 퍼센트를 통한 가로 막대차트 레이아웃 엔진 */
+.chart-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.chart-label {
+    width: 140px;
+    font-size: 13px;
+    color: #475569;
+    padding-right: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.chart-track {
+    flex: 1;
+    background: #f1f5f9;
+    height: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.chart-bar {
+    background: #3b82f6;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 로스 시간 막대그래프는 주황색으로 구별 */
+#lossChart .chart-bar {
+    background: #f97316;
+}
+
+.chart-value {
+    position: absolute;
+    right: 8px;
+    top: 0;
+    line-height: 24px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* 테이블 공통 디자인 및 NG 행 하이라이트 */
+.raw-data-section {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.raw-data-section h2 {
+    font-size: 16px;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f8fafc;
+}
+
+/* NG(불량) 로우 배경 구분 스타일 */
+.row-ng {
+    background-color: #fef2f2 !important;
+    color: #991b1b;
+}
+
+.badge-ok {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.badge-ng {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 0 !important;
+    font-size: 14px;
+}

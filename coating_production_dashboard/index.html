@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코팅 설비 생산 대시보드</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 코팅 설비 생산 분석 대시보드</h1>
+            <div class="file-upload-wrapper">
+                <!-- 파일 선택이 정상적으로 가능하도록 기본 input 태그 배치 -->
+                <label for="csvFileInput" class="custom-file-upload">📂 CSV 파일 선택하기</label>
+                <input type="file" id="csvFileInput" accept=".csv" />
+                <span id="fileNameDisplay">선택된 파일 없음 (제조용 CSV 파일을 선택해 주세요)</span>
+            </div>
+        </header>
+
+        <!-- 1. 요약 카드 영역 -->
+        <section class="summary-cards">
+            <div class="card">
+                <h3>총 롤 수</h3>
+                <p id="totalRolls">-</p>
+            </div>
+            <div class="card card-ng">
+                <h3>불량률</h3>
+                <p id="errorRate">-</p>
+            </div>
+            <div class="card">
+                <h3>가동률</h3>
+                <p id="operationRate">-</p>
+            </div>
+            <div class="card">
+                <h3>총 로스시간</h3>
+                <p id="totalLossTime">-</p>
+            </div>
+        </section>
+
+        <!-- 2. 상단 불량(NG) 항목 요약 (추가 요청사항) -->
+        <section class="ng-summary-section" style="display: none;" id="ngSummarySection">
+            <h2>🚨 불량(NG) 발생 항목 실시간 요약</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>생산일자</th>
+                            <th>설비명</th>
+                            <th>MES_NO</th>
+                            <th>생산모델</th>
+                            <th>두께(좌/중/우)</th>
+                            <th>무게</th>
+                            <th>통기도</th>
+                            <th>인장강도</th>
+                            <th>로스 (분)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ngTableBody">
+                        <!-- 자바스크립트에서 NG 데이터만 동적으로 삽입 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. 그래프 시각화 영역 (div 너비 퍼센트 방식 구현) -->
+        <section class="charts-grid">
+            <div class="chart-container">
+                <h2>📊 설비별 생산 롤 수 <span class="sort-info">(많은순)</span></h2>
+                <div id="facilityChart" class="chart-box"></div>
+            </div>
+            <div class="chart-container">
+                <h2>📊 생산모델별 생산 롤 수 <span class="sort-info">(많은순)</span></h2>
+                <div id="modelChart" class="chart-box"></div>
+            </div>
+            <div class="chart-container">
+                <h2>📊 일자별 생산 롤 수 <span class="sort-info">(날짜순)</span></h2>
+                <div id="dateChart" class="chart-box"></div>
+            </div>
+            <div class="chart-container">
+                <h2>📊 설비별 로스 시간 변화량 <span class="sort-info">(많은순)</span></h2>
+                <div id="lossChart" class="chart-box"></div>
+            </div>
+        </section>
+
+        <!-- 4. 전체 생산 롤 데이터 표 -->
+        <section class="raw-data-section">
+            <h2>📋 전체 생산 마스터 데이터 표</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>생산일자</th>
+                            <th>설비명</th>
+                            <th>MES_NO</th>
+                            <th>생산모델</th>
+                            <th>두께_좌</th>
+                            <th>두께_중</th>
+                            <th>두께_우</th>
+                            <th>무게</th>
+                            <th>통기도</th>
+                            <th>인장강도</th>
+                            <th>생산시간(분)</th>
+                            <th>로스시간(분)</th>
+                            <th>판정</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mainTableBody">
+                        <tr>
+                            <td colspan="13" class="empty-msg">상단의 CSV 파일을 선택하면 대시보드가 실시간으로 분석됩니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
